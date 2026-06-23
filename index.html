@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medieval Synthesis · Part IV | Cultural Musings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#c9a86a;--gold-bright:#e8cb8a;--crimson:#7a1f2b;--crimson-bright:#9c2c3a;
+  --bg:#0a080e;--panel:#13101a;--panel-2:#1a1525;--border:#3a2e44;
+  --text:#e0d8f0;--text-dim:#9a90b0;--text-faint:#6a6080;
+  --cream:#f0eaff;--saffron:#c878d0;--indigo:#6a4daa;
+  --jade:#4a3daa;--jade-bright:#8a78dd;--pearl:#d0c8e8;
+  --syn:#b87a30;--syn-bright:#d9a050;--syn-dim:#7a4e18;
+  --fire:#d06030;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'EB Garamond',serif;font-size:18px;line-height:1.8;
+  background-image:
+    radial-gradient(ellipse at top left,rgba(184,122,48,0.08),transparent 55%),
+    radial-gradient(ellipse at bottom right,rgba(106,77,170,0.06),transparent 55%);
+}
+.dn{font-family:'Noto Serif Devanagari',serif;}
+h1,h2,h3,h4{font-family:'Cinzel',serif;letter-spacing:0.02em;}
+.mono{font-family:'Source Code Pro',monospace;font-size:0.82em;}
+.app{display:flex;min-height:100vh;}
+.sidebar{width:290px;flex-shrink:0;background:linear-gradient(180deg,#0d0a14,#070509);border-right:1px solid var(--border);position:sticky;top:0;height:100vh;overflow-y:auto;padding:28px 0 40px;}
+.sidebar::-webkit-scrollbar{width:5px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+.brand{padding:0 22px 20px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.brand .om{font-size:32px;color:var(--syn-bright);display:block;margin-bottom:6px;}
+.brand h1{font-size:13px;color:var(--cream);line-height:1.4;letter-spacing:0.04em;}
+.brand p{font-family:'Cormorant Garamond',serif;font-size:11.5px;color:var(--text-faint);margin-top:5px;font-style:italic;}
+.wp-badge{margin:0 22px 16px;padding:10px 14px;background:rgba(184,122,48,0.1);border:1px solid rgba(184,122,48,0.3);border-radius:4px;}
+.wp-badge .wl{font-family:'Cinzel';font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--syn-bright);margin-bottom:5px;}
+.wp-badge p{font-size:12px;color:var(--text-faint);line-height:1.5;}
+.navgroup{margin-bottom:4px;}
+.navgroup .label{font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--text-faint);padding:10px 22px 4px;}
+.navlink{display:block;padding:7px 22px;color:var(--text-dim);text-decoration:none;font-size:13px;border-left:2px solid transparent;transition:all .15s ease;cursor:pointer;line-height:1.45;}
+.navlink:hover{color:var(--syn-bright);background:rgba(184,122,48,0.07);}
+.navlink.active{color:var(--syn-bright);border-left-color:var(--syn);background:rgba(184,122,48,0.12);}
+.series-nav{margin:14px 22px 0;padding:13px 15px;background:rgba(184,122,48,0.05);border:1px solid var(--border);border-radius:5px;}
+.series-nav .sn-label{font-family:'Cinzel';font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--saffron);margin-bottom:7px;}
+.series-nav a{display:block;font-size:12px;color:var(--text-faint);text-decoration:none;padding:3px 0;transition:color .15s;}
+.series-nav a:hover{color:var(--syn-bright);}
+.series-nav a.current{color:var(--syn-bright);font-weight:600;}
+.main{flex:1;min-width:0;}
+.breadcrumb{position:sticky;top:0;z-index:30;background:rgba(10,8,14,0.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:11px 44px;font-size:12.5px;color:var(--text-faint);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.breadcrumb span.cur{color:var(--syn-bright);}
+.breadcrumb .wp-label{margin-left:auto;font-family:'Cinzel';font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--syn-bright);padding:2px 8px;border:1px solid rgba(184,122,48,0.4);border-radius:2px;}
+.tabbar{position:sticky;top:38px;z-index:29;display:flex;overflow-x:auto;background:var(--panel);border-bottom:1px solid var(--border);scrollbar-width:thin;scrollbar-color:var(--syn-bright) var(--panel);}
+.tabbar::-webkit-scrollbar{height:3px;}
+.tabbar::-webkit-scrollbar-thumb{background:var(--syn);border-radius:4px;}
+.tabbtn{flex-shrink:0;padding:10px 16px;font-size:12.5px;color:var(--text-dim);background:none;border:none;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;font-family:'EB Garamond',serif;letter-spacing:0.03em;}
+.tabbtn:hover{color:var(--syn-bright);}
+.tabbtn.active{color:var(--syn-bright);border-bottom-color:var(--syn);background:rgba(184,122,48,0.08);}
+.section{padding:54px 60px 76px;max-width:1180px;}
+.section.hidden{display:none;}
+.wp-header{border:1px solid rgba(184,122,48,0.3);border-radius:6px;padding:28px 32px;margin-bottom:36px;background:linear-gradient(135deg,rgba(184,122,48,0.07),rgba(106,77,170,0.05));}
+.wp-header .series-tag{font-family:'Cinzel';font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--syn-bright);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.wp-header .series-tag::before{content:'';width:24px;height:1px;background:var(--syn);}
+.wp-header h2{font-size:27px;color:var(--cream);line-height:1.2;margin-bottom:8px;}
+.wp-header .dn-title{font-family:'Noto Serif Devanagari';font-size:23px;color:var(--syn-bright);display:block;margin-bottom:10px;}
+.wp-meta{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border);}
+.wp-meta-item{font-size:12.5px;color:var(--text-faint);}
+.wp-meta-item strong{color:var(--text-dim);font-weight:500;}
+.abstract{font-family:'Cormorant Garamond';font-size:17.5px;color:var(--text-dim);font-style:italic;line-height:1.7;margin-bottom:8px;}
+.section-heading{font-family:'Cinzel';font-size:12.5px;letter-spacing:0.18em;text-transform:uppercase;color:var(--saffron);margin:38px 0 16px;display:flex;align-items:center;gap:10px;}
+.section-heading::before{content:'';width:32px;height:1px;background:var(--saffron);flex-shrink:0;}
+.section-heading .num{font-size:10px;color:var(--text-faint);border:1px solid var(--border);padding:2px 7px;border-radius:2px;font-family:'Source Code Pro',monospace;}
+h2.article-title{font-size:24px;color:var(--cream);margin-bottom:14px;line-height:1.3;}
+h3.sub-title{font-family:'Cinzel';font-size:16px;color:var(--syn-bright);margin:28px 0 12px;}
+h4.sub-sub{font-family:'Cinzel';font-size:13.5px;color:var(--text);margin:20px 0 8px;}
+p{margin-bottom:15px;}
+p:last-child{margin-bottom:0;}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:22px 26px;margin-bottom:20px;}
+.panel.syn{border-left:3px solid var(--syn);}
+.panel.case-study{border-left:3px solid var(--jade-bright);background:rgba(74,61,170,0.05);}
+.panel.research{border-left:3px solid rgba(184,122,48,0.8);}
+.panel.vedanta{border-left:3px solid var(--crimson-bright);background:rgba(122,31,43,0.05);}
+.panel.bhakti{border-left:3px solid var(--gold);background:rgba(201,168,106,0.04);}
+.panel.logic{border-left:3px solid var(--jade-bright);}
+.panel h3{color:var(--syn-bright);font-size:15.5px;margin-bottom:12px;letter-spacing:0.02em;}
+.panel.case-study h3{color:var(--jade-bright);}
+.panel.vedanta h3{color:var(--crimson-bright);}
+.panel.bhakti h3{color:var(--gold-bright);}
+.cs-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border);}
+.cs-num{font-family:'Cinzel';font-size:22px;color:var(--jade-bright);flex-shrink:0;line-height:1;margin-top:2px;}
+.cs-meta{flex:1;}
+.cs-meta .cs-label{font-family:'Cinzel';font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--jade);margin-bottom:4px;}
+.cs-meta h3{color:var(--jade-bright);font-size:16px;margin-bottom:0;}
+.cs-meta .cs-sub{font-size:13px;color:var(--text-faint);margin-top:3px;}
+.sanskrit-block{font-family:'Noto Serif Devanagari';font-size:20px;color:var(--cream);background:var(--panel-2);border-left:3px solid var(--syn);padding:14px 22px;margin:18px 0;border-radius:0 4px 4px 0;line-height:1.9;}
+.iast{font-family:'Cormorant Garamond';font-style:italic;color:var(--syn-bright);font-size:16px;}
+.gloss{color:var(--text-dim);font-size:14.5px;margin-top:6px;}
+table.chron{width:100%;border-collapse:collapse;margin:18px 0;font-size:14.5px;}
+table.chron thead tr{background:rgba(184,122,48,0.12);}
+table.chron th{text-align:left;color:var(--syn-bright);font-family:'Cinzel';font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;padding:10px 13px;border-bottom:2px solid var(--syn);}
+table.chron td{padding:9px 13px;border-bottom:1px solid rgba(58,46,68,0.45);color:var(--text-dim);vertical-align:top;}
+table.chron td.era{color:var(--saffron);font-family:'Cinzel';font-size:12px;white-space:nowrap;}
+table.chron td.shastra{color:var(--syn-bright);font-weight:600;}
+table.chron td.note{font-size:13.5px;color:var(--text-faint);}
+table.compare{width:100%;border-collapse:collapse;font-size:14px;margin:16px 0;}
+table.compare th{background:rgba(184,122,48,0.1);color:var(--syn-bright);font-family:'Cinzel';font-size:10px;letter-spacing:0.08em;text-transform:uppercase;padding:9px 12px;text-align:left;}
+table.compare td{padding:8px 12px;border-bottom:1px solid rgba(58,46,68,0.4);color:var(--text-dim);vertical-align:top;}
+blockquote{border-left:3px solid var(--syn-bright);padding:10px 20px;margin:18px 0;font-family:'Cormorant Garamond';font-style:italic;font-size:18px;color:var(--text);background:rgba(184,122,48,0.04);}
+blockquote cite{display:block;margin-top:7px;font-size:12.5px;color:var(--text-faint);font-style:normal;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+@media(max-width:900px){.grid2,.grid3,.grid4{grid-template-columns:1fr;}}
+.callout{border:1px solid var(--syn);border-radius:5px;padding:18px 22px;margin:20px 0;background:rgba(184,122,48,0.04);}
+.callout .cl-head{font-family:'Cinzel';font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--syn-bright);margin-bottom:7px;}
+.callout.crimson{border-color:var(--crimson-bright);background:rgba(122,31,43,0.04);}
+.callout.crimson .cl-head{color:var(--crimson-bright);}
+.callout.gold{border-color:var(--gold);background:rgba(201,168,106,0.04);}
+.callout.gold .cl-head{color:var(--gold-bright);}
+.callout.jade{border-color:var(--jade-bright);background:rgba(74,61,170,0.04);}
+.callout.jade .cl-head{color:var(--jade-bright);}
+.stats-row{display:flex;gap:16px;flex-wrap:wrap;margin:20px 0;}
+.stat-card{flex:1;min-width:130px;background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:16px 18px;text-align:center;}
+.stat-card .sv{font-family:'Cinzel';font-size:26px;color:var(--syn-bright);line-height:1;}
+.stat-card .sl{font-size:12px;color:var(--text-faint);margin-top:5px;line-height:1.4;}
+.timeline{position:relative;padding-left:34px;margin:22px 0;}
+.timeline::before{content:'';position:absolute;left:9px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--syn),var(--jade-bright),transparent);}
+.tl-item{position:relative;margin-bottom:26px;}
+.tl-item::before{content:'';position:absolute;left:-29px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--syn);border:2px solid var(--syn-bright);}
+.tl-item.milestone::before{background:var(--syn-bright);width:15px;height:15px;left:-31px;}
+.tl-date{font-family:'Cinzel';font-size:11px;color:var(--saffron);letter-spacing:0.08em;margin-bottom:3px;}
+.tl-title{font-family:'Cinzel';font-size:14px;color:var(--cream);margin-bottom:5px;}
+.tl-body{font-size:14.5px;color:var(--text-dim);line-height:1.6;}
+.darshana-card{background:var(--panel);border:1px solid var(--border);border-radius:5px;padding:18px 20px;}
+.darshana-card .dc-label{font-family:'Cinzel';font-size:9px;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:6px;}
+.darshana-card .dc-name{font-family:'Cinzel';font-size:15px;margin-bottom:4px;}
+.darshana-card .dc-dev{font-family:'Noto Serif Devanagari';font-size:17px;margin-bottom:8px;}
+.darshana-card p{font-size:13.5px;color:var(--text-dim);line-height:1.55;}
+.darshana-card.advaita{border-top:2px solid var(--crimson-bright);}
+.darshana-card.advaita .dc-label{color:var(--crimson-bright);}
+.darshana-card.advaita .dc-name{color:var(--crimson-bright);}
+.darshana-card.advaita .dc-dev{color:var(--crimson-bright);}
+.darshana-card.vishishta{border-top:2px solid var(--gold-bright);}
+.darshana-card.vishishta .dc-label{color:var(--gold-bright);}
+.darshana-card.vishishta .dc-name{color:var(--gold-bright);}
+.darshana-card.vishishta .dc-dev{color:var(--gold-bright);}
+.darshana-card.dvaita{border-top:2px solid var(--jade-bright);}
+.darshana-card.dvaita .dc-label{color:var(--jade-bright);}
+.darshana-card.dvaita .dc-name{color:var(--jade-bright);}
+.darshana-card.dvaita .dc-dev{color:var(--jade-bright);}
+.darshana-card.dvaitadvaita{border-top:2px solid var(--syn-bright);}
+.darshana-card.dvaitadvaita .dc-label{color:var(--syn-bright);}
+.darshana-card.dvaitadvaita .dc-name{color:var(--syn-bright);}
+.darshana-card.dvaitadvaita .dc-dev{color:var(--syn-bright);}
+.footnotes{margin-top:36px;padding-top:20px;border-top:1px solid var(--border);font-size:13px;color:var(--text-faint);}
+.footnotes h4{font-family:'Cinzel';font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px;}
+.fn-item{margin-bottom:6px;padding-left:20px;text-indent:-20px;line-height:1.55;}
+.fn-num{color:var(--saffron);font-family:'Source Code Pro',monospace;font-size:11px;margin-right:6px;}
+.tag{display:inline-block;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;padding:2px 7px;border-radius:3px;border:1px solid var(--border);color:var(--text-faint);margin-right:5px;margin-bottom:3px;}
+.tag.syn{border-color:var(--syn);color:var(--syn-bright);}
+.tag.vedanta{border-color:var(--crimson-bright);color:var(--crimson-bright);}
+.tag.bhakti{border-color:var(--gold);color:var(--gold-bright);}
+.tag.logic{border-color:var(--jade-bright);color:var(--jade-bright);}
+.footer-nav{display:flex;justify-content:space-between;align-items:center;margin-top:52px;padding-top:22px;border-top:1px solid var(--border);}
+.fn-btn{color:var(--syn-bright);text-decoration:none;font-size:13.5px;cursor:pointer;font-family:'Cinzel';letter-spacing:0.04em;}
+.fn-btn:hover{color:var(--cream);}
+.part-badge{font-family:'Cinzel';font-size:10px;letter-spacing:0.16em;text-transform:uppercase;padding:4px 12px;border:1px solid var(--syn-bright);border-radius:3px;color:var(--syn-bright);}
+@media(max-width:860px){.sidebar{position:fixed;left:-290px;transition:left .2s;z-index:50;}.sidebar.open{left:0;}.section{padding:30px 16px 60px;}.wp-header{padding:18px 16px;}}
+.menu-toggle{display:none;}
+@media(max-width:860px){.menu-toggle{display:block;position:fixed;bottom:20px;right:20px;z-index:60;width:46px;height:46px;border-radius:50%;background:var(--syn);color:var(--cream);border:none;font-size:20px;cursor:pointer;}}
+/* Debate-map specific */
+.debate-row{display:grid;grid-template-columns:1fr 48px 1fr;gap:0;margin:14px 0;align-items:start;}
+.debate-col{background:var(--panel);border:1px solid var(--border);padding:14px 16px;border-radius:4px;font-size:14px;color:var(--text-dim);}
+.debate-col .dc-h{font-family:'Cinzel';font-size:10px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:7px;}
+.debate-col.left .dc-h{color:var(--crimson-bright);}
+.debate-col.right .dc-h{color:var(--jade-bright);}
+.debate-mid{display:flex;align-items:center;justify-content:center;font-family:'Cinzel';font-size:10px;color:var(--text-faint);writing-mode:vertical-rl;}
+.navabhakti{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0;}
+.nb-card{background:var(--panel-2);border:1px solid var(--border);border-radius:4px;padding:14px 16px;}
+.nb-card .nb-num{font-family:'Cinzel';font-size:22px;color:var(--gold-bright);line-height:1;margin-bottom:4px;}
+.nb-card .nb-name{font-family:'Cinzel';font-size:11px;color:var(--gold-bright);letter-spacing:0.06em;margin-bottom:4px;}
+.nb-card .nb-dev{font-family:'Noto Serif Devanagari';font-size:14px;color:var(--gold);margin-bottom:6px;}
+.nb-card p{font-size:13px;color:var(--text-faint);line-height:1.5;}
+</style>
+</head>
+<body>
+<div class="app">
+<nav class="sidebar" id="sidebar">
+  <div class="brand">
+    <span class="om dn">ॐ</span>
+    <h1>शास्त्रोद्भवः<br><span style="font-size:11px;color:var(--text-dim);font-weight:400;">The Birth &amp; Evolution of the Śāstras</span></h1>
+    <p>culturalmusings.com · Research White Paper Series</p>
+  </div>
+  <div class="wp-badge">
+    <div class="wl">White Paper · Part IV of V</div>
+    <p>Medieval Synthesis — Vedānta, Bhakti, Nyāya &amp; the convergence of śāstric traditions</p>
+  </div>
+  <div class="navgroup">
+    <div class="label">भाग ४ · Part IV Contents</div>
+    <a class="navlink" data-target="s-abstract4">Abstract &amp; Overview</a>
+    <a class="navlink" data-target="s-vedanta-schools">§1 · The Four Vedānta Schools — Brahmasūtra Divergence</a>
+    <a class="navlink" data-target="s-bhakti-shastra">§2 · Bhakti as Śāstra — Devotion Systematised</a>
+    <a class="navlink" data-target="s-navya-nyaya">§3 · Navya-Nyāya — The Logic Revolution</a>
+    <a class="navlink" data-target="s-smarta">§4 · Smārta Synthesis — The Pañcāyatana Framework</a>
+    <a class="navlink" data-target="s-commentary">§5 · The Art of Commentary — Bhāṣya as Creative Śāstra</a>
+    <a class="navlink" data-target="s-regional">§6 · Regional Transmission — South &amp; North Convergences</a>
+    <a class="navlink" data-target="s-cross-tradition">§7 · Cross-Traditional Debate — The Medieval Dialectic</a>
+    <a class="navlink" data-target="s-chrono4">§8 · Master Chronology IV</a>
+  </div>
+  <div class="series-nav">
+    <div class="sn-label">Five‑Part Series</div>
+    <a href="shastra-series-part1.html">Part I · Origins &amp; Vedic Śāstras</a>
+    <a href="shastra-series-part2.html">Part II · Classical Śāstras</a>
+    <a href="shastra-series-part3.html">Part III · Tantric &amp; Āgamic Śāstras</a>
+    <a href="shastra-series-part4.html" class="current">Part IV · Medieval Synthesis</a>
+    <a href="shastra-series-part5.html">Part V · Modern Continuity</a>
+  </div>
+</nav>
+<main class="main">
+<div class="breadcrumb">
+  culturalmusings.com <span style="color:var(--border)">/</span> शास्त्रोद्भवः <span style="color:var(--border)">/</span>
+  <span class="cur" id="crumb">Abstract</span>
+  <span class="wp-label">White Paper · Part IV</span>
+</div>
+<div class="tabbar" id="tabbar">
+  <button class="tabbtn" data-target="s-abstract4">Abstract</button>
+  <button class="tabbtn" data-target="s-vedanta-schools">§1 Vedānta</button>
+  <button class="tabbtn" data-target="s-bhakti-shastra">§2 Bhakti</button>
+  <button class="tabbtn" data-target="s-navya-nyaya">§3 Navya-Nyāya</button>
+  <button class="tabbtn" data-target="s-smarta">§4 Smārta</button>
+  <button class="tabbtn" data-target="s-commentary">§5 Commentary</button>
+  <button class="tabbtn" data-target="s-regional">§6 Regional</button>
+  <button class="tabbtn" data-target="s-cross-tradition">§7 Debate</button>
+  <button class="tabbtn" data-target="s-chrono4">§8 Chronology</button>
+</div>
+<div id="sections-root">
+
+<!-- ABSTRACT -->
+<section class="section" id="s-abstract4">
+  <div class="wp-header">
+    <div class="series-tag">Research Paper · Part IV of V · Cultural Musings — Śāstrodbhavaḥ Series</div>
+    <span class="dn-title">समन्वयशास्त्रम् — The Śāstra of Synthesis</span>
+    <h2>The Medieval Synthesis: Vedānta, Bhakti, Logic, and the Convergence of Traditions</h2>
+    <div class="wp-meta">
+      <div class="wp-meta-item"><strong>Period Covered:</strong> c. 700–1600 CE</div>
+      <div class="wp-meta-item"><strong>Traditions:</strong> Advaita, Viśiṣṭādvaita, Dvaita, Navya-Nyāya, Bhakti movements, Smārta synthesis</div>
+      <div class="wp-meta-item"><strong>Key Figures:</strong> Śaṅkara, Rāmānuja, Madhva, Nimbārka, Vallabha, Gaṅgeśa, Vijñānabhikṣu</div>
+      <div class="wp-meta-item"><strong>Series Part:</strong> IV of V</div>
+    </div>
+  </div>
+
+  <div class="section-heading"><span class="num">0.1</span>Abstract</div>
+  <p class="abstract">The medieval period of Indian intellectual history — roughly the eight centuries between Śaṅkara's Brahmasūtra-bhāṣya (c. 700 CE) and Vijñānabhikṣu's synthetic Yoga-Sāṃkhya-Vedānta project (c. 1550 CE) — is not, as it is sometimes characterised, a period of scholastic decline after the classical age. It is the most philosophically productive, textually prolific, and institutionally consequential period in the entire history of Indian systematic thought. The medieval period produced the four major Vedāntic schools through a single foundational controversy; transformed devotional practice into formal śāstra through the Bhakti movements; revolutionised the methodology of logical analysis through Navya-Nyāya; and achieved, in the Smārta synthesis, the most comprehensive integration of theistic, ritualistic, and philosophical traditions yet seen. This paper examines these four achievements as a single connected project: the medieval synthesis.</p>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="sv">4</div><div class="sl">Major Vedāntic schools — all four generated by commentary on the same 555 Brahmasūtra aphorisms</div></div>
+    <div class="stat-card"><div class="sv">9</div><div class="sl">Forms of Bhakti enumerated by Bhāgavata Purāṇa (navadhā-bhakti) and systematised by Rūpa Gosvāmī</div></div>
+    <div class="stat-card"><div class="sv">c.1320</div><div class="sl">CE — Gaṅgeśa's Tattvacintāmaṇi; the founding document of Navya-Nyāya, still studied in Sanskrit pathāśālās</div></div>
+    <div class="stat-card"><div class="sv">5</div><div class="sl">Deities of the Smārta pañcāyatana — Śiva, Viṣṇu, Devī, Sūrya, Gaṇeśa — integrated into a single non-sectarian framework</div></div>
+  </div>
+
+  <div class="callout">
+    <div class="cl-head">The Central Argument of Part IV</div>
+    <p style="font-size:15.5px;">The medieval period is characterised by a paradox: an era of increasing sectarian differentiation (each Vedāntic school more sharply distinguished from the others; each Bhakti movement more intensely focused on its own deity and tradition) produced, at the same time, the most ambitious cross-traditional synthetic projects in Indian intellectual history. The Smārta synthesis, the Navya-Nyāya meta-logic, and the later Vedānta projects of thinkers like Vijñānabhikṣu all represent attempts to find a higher-order framework within which the competing sectarian claims could be accommodated without either collapsing them into false unity or leaving them in merely parallel incomprehension. Understanding <em>how</em> the medieval tradition managed this paradox is the central task of Part IV.</p>
+  </div>
+
+  <div class="footer-nav">
+    <a class="fn-btn" href="shastra-series-part3.html">← Part III: Tantric &amp; Āgamic Śāstras</a>
+    <span class="fn-btn" onclick="showSection('s-vedanta-schools')">Next: §1 Vedānta Schools →</span>
+  </div>
+</section>
+
+<!-- §1 VEDANTA SCHOOLS -->
+<section class="section hidden" id="s-vedanta-schools">
+  <div class="section-heading"><span class="num">§ 1</span>Vedānta Schools</div>
+  <h2 class="article-title">One Text, Four Philosophies — The Brahmasūtra Divergence</h2>
+  <p>The <span class="iast">Brahmasūtras</span> (also called the <span class="iast">Vedānta-sūtras</span> or <span class="iast">Śārīrakamīmāṃsā-sūtras</span>), composed by Bādarāyaṇa (c. 200 BCE–200 CE), consist of 555 aphorisms in four chapters (<span class="iast">adhyāyas</span>) that attempt to systematise, reconcile, and defend the teachings of the Upaniṣads against rival philosophical systems. The aphorisms are so terse as to be nearly unintelligible without commentary — each typically only three or four words long. This very terseness became the generative engine of Indian philosophical diversity: each medieval Vedāntācārya (master of Vedānta) was compelled to write a <span class="iast">bhāṣya</span> (authoritative commentary) on the Brahmasūtras, and the divergences between those commentaries produced the four major schools of Vedāntic philosophy.</p>
+
+  <div class="panel syn">
+    <h3>The Four Schools — Generated from a Single Source</h3>
+    <div class="grid4" style="margin-top:14px;">
+      <div class="darshana-card advaita">
+        <div class="dc-label">School I · c. 700 CE</div>
+        <div class="dc-dev">अद्वैत</div>
+        <div class="dc-name">Advaita Vedānta</div>
+        <p>Śaṅkarācārya. Brahman is the one non-dual reality; the individual self (jīva) and the world are not ultimately real — they are superimpositions (adhyāsa) on Brahman. Mokṣa is the recognition of one's identity with Brahman. Duality is due to avidyā (nescience).</p>
+      </div>
+      <div class="darshana-card vishishta">
+        <div class="dc-label">School II · c. 1017–1137 CE</div>
+        <div class="dc-dev">विशिष्टाद्वैत</div>
+        <div class="dc-name">Viśiṣṭādvaita</div>
+        <p>Rāmānujācārya. Brahman is Viṣṇu/Nārāyaṇa with souls (cit) and matter (acit) as his body. Reality is one, but differentiated — qualified non-dualism. The individual soul is genuinely real and remains distinct from Brahman even in liberation. Bhakti is the highest means.</p>
+      </div>
+      <div class="darshana-card dvaita">
+        <div class="dc-label">School III · c. 1238–1317 CE</div>
+        <div class="dc-dev">द्वैत</div>
+        <div class="dc-name">Dvaita Vedānta</div>
+        <p>Madhvācārya. Brahman (Viṣṇu) and souls and matter are fundamentally and eternally distinct (dvaita). Five-fold difference (pañca-bheda) is real and ultimate. Liberation is eternal nearness to Viṣṇu, not identity. Śrī Hari is the sole independent reality.</p>
+      </div>
+      <div class="darshana-card dvaitadvaita">
+        <div class="dc-label">Schools IV–V · 12th–15th CE</div>
+        <div class="dc-dev">भेदाभेद</div>
+        <div class="dc-name">Bhedābheda Variants</div>
+        <p>Nimbārkācārya (Dvaitādvaita) and Vallabhācārya (Śuddhādvaita). The soul is simultaneously different and non-different from Brahman — difference within unity. Vallabha's pure non-dualism makes Kṛṣṇa's bliss (ānanda) the sole ultimate reality.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel case-study">
+    <div class="cs-header">
+      <div class="cs-num">CS·13</div>
+      <div class="cs-meta">
+        <div class="cs-label">Case Study 13 · Interpretive Divergence</div>
+        <h3>Brahmasūtra I.1.2 — "Janmādyasya yataḥ" — One Aphorism, Four Interpretations</h3>
+        <div class="cs-sub">How the Vedāntācāryas read the same twelve Sanskrit syllables and produced irreconcilable ontologies</div>
+      </div>
+    </div>
+    <div class="sanskrit-block">
+      जन्माद्यस्य यतः ॥ १.१.२ ॥
+    </div>
+    <p class="gloss" style="margin-bottom:16px;">"That from which the origin etc. [i.e., origin, sustenance, and dissolution] of this [world]." — The second sūtra, defining Brahman as the source of the cosmos.</p>
+    <table class="compare">
+      <thead><tr><th>School</th><th>How They Read "Janmādyasya yataḥ"</th><th>Ontological Implication</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--crimson-bright);font-weight:600;">Advaita (Śaṅkara)</td>
+          <td>Brahman is the <em>material and efficient cause</em> of the world through māyā-śakti; the world is Brahman in appearance, not reality. "Origin etc." applies to the phenomenal level only.</td>
+          <td>Brahman is nirguṇa (without qualities); world-production is apparent, not real; avidyā is beginningless, cosmologically operative nescience.</td>
+        </tr>
+        <tr>
+          <td style="color:var(--gold-bright);font-weight:600;">Viśiṣṭādvaita (Rāmānuja)</td>
+          <td>Brahman (Viṣṇu) is the <em>sole material and efficient cause</em> in the strict sense; souls and matter are his modes (prakāra). "Origin" is the real cosmic transformation of his body.</td>
+          <td>Brahman is saguṇa (with qualities); world-production is the real transformation (pariṇāma) of the divine body; souls retain their individuality permanently.</td>
+        </tr>
+        <tr>
+          <td style="color:var(--jade-bright);font-weight:600;">Dvaita (Madhva)</td>
+          <td>Brahman (Viṣṇu) is the <em>efficient cause only</em>; matter (prakṛti) is the material cause under his control. "Origin etc." points to his sole agency over independent material.</td>
+          <td>Brahman is sovereign over a permanently distinct material world and permanently distinct souls; five-fold difference (pañca-bheda) is eternal reality.</td>
+        </tr>
+        <tr>
+          <td style="color:var(--syn-bright);font-weight:600;">Bhedābheda (Nimbārka)</td>
+          <td>Brahman is simultaneously <em>both material and efficient cause</em> in a way that makes the effect real and yet non-different from the cause. "Origin" indicates real transformation without implying subordination of souls.</td>
+          <td>Identity-in-difference is the fundamental ontological structure; both the unity and the plurality of beings are equally real.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="callout jade" style="margin-top:16px;">
+      <div class="cl-head">The Śāstric Achievement of Divergence</div>
+      <p style="font-size:14.5px;">The fact that these four readings are generated from a twelve-syllable Sanskrit aphorism is itself the most important demonstration of what śāstric methodology produces. The Brahmasūtra was not ambiguous through carelessness — Bādarāyaṇa designed it to be synthetically terse, forcing every reader to bring their full philosophical apparatus to bear on every sūtra. The result was not confusion but the most sophisticated system of structured philosophical divergence ever generated from a single body of canonical texts: four complete, internally consistent, formally argued ontological systems, each unable to reduce to any other, each insisting on the others' errors through the same exegetical method. This is productive precision through formal disagreement — the śāstric method at its highest.</p>
+    </div>
+  </div>
+
+  <h3 class="sub-title">1.1 Śaṅkara's Methodological Achievement — Vivartavāda vs. Pariṇāmavāda</h3>
+  <p>The most technically consequential contribution of the Vedāntic debate is the distinction between two theories of how Brahman relates to the world — a distinction that drives the Advaita–Viśiṣṭādvaita divide more precisely than any other single concept:</p>
+  <div class="grid2">
+    <div class="panel vedanta">
+      <h3>Vivartavāda — Appearance Theory</h3>
+      <p style="font-size:14.5px;">Śaṅkara's position: the world is not a real transformation of Brahman but an <em>appearance</em> (vivarta) — like rope appearing as snake, or silver appearing in nacre. Brahman does not change; what changes is the observer's cognitive state. The world is <em>vyāvahārika</em> (conventionally real) but not <em>pāramārthika</em> (ultimately real). The claim "the world is Brahman" is ultimately true in the sense that there is nothing other than Brahman — but the world as world (as multiplicity, as subject-object duality) is not real.</p>
+      <div class="callout crimson">
+        <div class="cl-head">Key Technical Move</div>
+        <p style="font-size:13.5px;">Śaṅkara introduces <em>tūlāvidyā</em> (cosmic nescience) as the śakti of Brahman that produces the appearance of the world — making Brahman both the ground of the world and entirely unchanged by it. This is the doctrine of <em>māyā-śakti</em>: Brahman's power produces a world that is neither real (sat) nor unreal (asat) but inexplicable (anirvacanīya).</p>
+      </div>
+    </div>
+    <div class="panel bhakti">
+      <h3>Pariṇāmavāda — Transformation Theory</h3>
+      <p style="font-size:14.5px;">Rāmānuja's counter: the world is a <em>real transformation</em> (pariṇāma) of Brahman — specifically, of Brahman's modes (souls and matter). Rāmānuja attacks Śaṅkara's anirvacanīya ("inexplicable") category as incoherent: something that is neither real nor unreal cannot serve as the explanation for anything. The world <em>really exists</em> and really is Brahman — but Brahman in his qualified (saguṇa) mode with souls and matter as his body.</p>
+      <div class="callout gold">
+        <div class="cl-head">Rāmānuja's Critique of Māyā</div>
+        <p style="font-size:13.5px;">In the <em>Śrī Bhāṣya</em>, Rāmānuja lists seven fatal objections (saptānupapatti) to the Advaita doctrine of māyā, arguing that an avidyā that obscures Brahman from itself is self-contradictory, that pure consciousness cannot be the locus of error, and that the dissolution of the world in liberation implies its prior reality.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-nav">
+    <span class="fn-btn" onclick="showSection('s-abstract4')">← Abstract</span>
+    <span class="fn-btn" onclick="showSection('s-bhakti-shastra')">Next: §2 Bhakti →</span>
+  </div>
+</section>
+
+<!-- §2 BHAKTI AS SHASTRA -->
+<section class="section hidden" id="s-bhakti-shastra">
+  <div class="section-heading"><span class="num">§ 2</span>Bhakti as Śāstra</div>
+  <h2 class="article-title">Devotion Systematised — The Bhakti Śāstras</h2>
+  <p>The <span class="iast">bhakti</span> movements that sweep across the Indian subcontinent from the 6th century CE (the Āḷvārs and Nāyanmārs of Tamil Nadu) through the 16th century (the Vaiṣṇava schools of Bengal and the Deccan) represent one of the most remarkable intellectual achievements of the medieval period: the transformation of intense personal religious devotion into a formally organised, philosophically grounded, technically precise śāstric tradition. This transformation is the defining achievement of what we may call the <em>bhakti śāstras</em>.</p>
+
+  <div class="panel bhakti">
+    <h3>Nārada Bhakti Sūtra — Devotion as Aphoristic Śāstra</h3>
+    <p>The <span class="iast">Nārada Bhakti Sūtra</span> (c. 8th–11th century CE in its present form; attributed to the sage Nārada) is the most structurally śāstric of the devotional texts: a collection of 84 aphorisms that define, classify, and systematise bhakti in the manner of a formal sūtra text. The opening definition is both philosophically precise and experientially immediate:</p>
+    <div class="sanskrit-block">
+      अथातो भक्तिं व्याख्यास्यामः ॥ १ ॥<br>
+      सा त्वस्मिन् परमप्रेमरूपा ॥ २ ॥<br>
+      अमृतस्वरूपा च ॥ ३ ॥
+    </div>
+    <p class="gloss">"Now, therefore, we will explain bhakti. It is of the nature of supreme love toward Him. And it is of the nature of immortality." — Nārada Bhakti Sūtra 1–3</p>
+    <p style="font-size:14.5px;margin-top:12px;">The sūtric form — three words per aphorism, building from definition to characteristic to quality — mirrors the Brahmasūtra's own method. The Nārada Bhakti Sūtra is doing something philosophically deliberate: appropriating the authority of the sūtra genre for a teaching whose entire content is love. This is śāstrification as a form of argument: bhakti is not a supplement to the philosophical tradition but a formal discipline within it.</p>
+  </div>
+
+  <div class="panel case-study">
+    <div class="cs-header">
+      <div class="cs-num">CS·14</div>
+      <div class="cs-meta">
+        <div class="cs-label">Case Study 14 · Bhakti Taxonomy</div>
+        <h3>Navadhā Bhakti — The Nine-fold Taxonomy of Devotional Practice</h3>
+        <div class="cs-sub">Bhāgavata Purāṇa VII.5.23–24 and Rūpa Gosvāmī's Bhakti-rasāmṛta-sindhu — two śāstric frameworks</div>
+      </div>
+    </div>
+    <p>The <span class="iast">Bhāgavata Purāṇa</span> (c. 9th–10th century CE), in one of the most frequently cited passages in the Indian devotional literature, enumerates nine forms of bhakti through the words of Prahlāda — a taxonomy that becomes the structural backbone of all subsequent bhakti śāstras:</p>
+    <div class="navabhakti">
+      <div class="nb-card">
+        <div class="nb-num">01</div>
+        <div class="nb-name">Śravaṇa</div>
+        <div class="nb-dev">श्रवण</div>
+        <p>Hearing the divine names, stories, and qualities. The primary receptor-bhakti — the ear as the organ of devotional entrance.</p>
+      </div>
+      <div class="nb-card">
+        <div class="nb-num">02</div>
+        <div class="nb-name">Kīrtana</div>
+        <div class="nb-dev">कीर्तन</div>
+        <p>Singing or chanting the divine names and glories. The active vocal bhakti — the most communal and socially transformative.</p>
+      </div>
+      <div class="nb-card">
+        <div class="nb-num">03</div>
+        <div class="nb-name">Smaraṇa</div>
+        <div class="nb-dev">स्मरण</div>
+        <p>Constant mindful remembrance of the divine — the interiorised bhakti that does not depend on external action.</p>
+      </div>
+      <div class="nb-card">
+        <div class="nb-num">04</div>
+        <div class="nb-name">Pādasevanā</div>
+        <div class="nb-dev">पादसेवना</div>
+        <p>Service at the feet of the divine — ritual attendance, physical care of the icon, temple service.</p>
+      </div>
+      <div class="nb-card">
+        <div class="nb-num">05</div>
+        <div class="nb-name">Arcana</div>
+        <div class="nb-dev">अर्चन</div>
+        <p>Formal image-worship with the sixteen offerings (ṣoḍaśopacāra) — the Āgamic ritual incorporated into bhakti.</p>
+      </div>
+      <div class="nb-card">
+        <div class="nb-num">06</div>
+        <div class="nb-name">Vandana</div>
+        <div class="nb-dev">वन्दन</div>
+        <p>Salutation, prostration, prayer — the devotional acknowledgment of total dependence and the divine's absolute sovereignty.</p>
+      </div>
+      <div class="nb-card">
+        <div class="nb-num">07</div>
+        <div class="nb-name">Dāsya</div>
+        <div class="nb-dev">दास्य</div>
+        <p>The servant-relationship to the divine — bhakti as perpetual seva. The devotee's complete self-subordination.</p>
+      </div>
+      <div class="nb-card">
+        <div class="nb-num">08</div>
+        <div class="nb-name">Sakhya</div>
+        <div class="nb-dev">सख्य</div>
+        <p>Friendship and companionship with the divine — the equal relationship exemplified by Arjuna's relation to Kṛṣṇa.</p>
+      </div>
+      <div class="nb-card">
+        <div class="nb-num">09</div>
+        <div class="nb-name">Ātmanivedana</div>
+        <div class="nb-dev">आत्मनिवेदन</div>
+        <p>Total self-surrender — the highest bhakti, the complete offering of the self without reservation to the divine.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sub-title">2.1 Rūpa Gosvāmī and the Bhakti-rasāmṛta-sindhu — Bhakti Rasa Theory</h3>
+  <p>The most sophisticated śāstric achievement of the bhakti traditions is Rūpa Gosvāmī's <span class="iast">Bhakti-rasāmṛta-sindhu</span> ("The Ocean of the Nectar of Devotional Rasa"), composed in Vṛndāvana c. 1541 CE. This text performs an extraordinary move: it takes the aesthetic theory of rasa from the Nāṭyaśāstra tradition (Part II, §7) — the theory of the eight or nine aesthetic sentiments — and applies it systematically to bhakti, arguing that devotional love for Kṛṣṇa generates its own superlative rasa: <span class="iast">bhakti-rasa</span>, the "devotional aesthetic sentiment."</p>
+
+  <div class="panel syn">
+    <h3>The Five Primary Bhakti Rasas — Rūpa Gosvāmī's Classification</h3>
+    <table class="chron">
+      <thead><tr><th>Rasa</th><th>Sanskrit</th><th>Relational Mode</th><th>Classical Parallel</th><th>Exemplar</th></tr></thead>
+      <tbody>
+        <tr><td class="shastra">Śānta</td><td><span class="dn" style="font-size:14px;">शान्त</span></td><td>Peaceful equanimity; the devotee's relation to Kṛṣṇa is one of calm, undifferentiated divine awareness</td><td>Not in classical Bharata's list; Rūpa adds it as the foundation level</td><td class="note">The sages (munis) meditating on Brahman who discover that Brahman is Kṛṣṇa</td></tr>
+        <tr><td class="shastra">Dāsya</td><td><span class="dn" style="font-size:14px;">दास्य</span></td><td>Servitude; the devotee's primary emotion is reverential service and protection from Kṛṣṇa</td><td>Corresponds to the vīra (heroic) rasa in Bharata's system when directed at the divine</td><td class="note">Hanumān's relation to Rāma; Uddhava's service to Kṛṣṇa</td></tr>
+        <tr><td class="shastra">Sakhya</td><td><span class="dn" style="font-size:14px;">सख्य</span></td><td>Friendship; the devotee relates to Kṛṣṇa as an equal companion, playing, arguing, competing</td><td>The intimacy of this rasa exceeds any classical rasa category in its paradox of equality-with-divinity</td><td class="note">The cowherd boys (gopas) of Vṛndāvana who wrestle and race with Kṛṣṇa</td></tr>
+        <tr><td class="shastra">Vātsalya</td><td><span class="dn" style="font-size:14px;">वात्सल्य</span></td><td>Parental love; the devotee relates to Kṛṣṇa as a child to be protected, fed, and cherished</td><td>Exceeds classical rasa theory — the idea that the supreme divinity is a child who needs protection is unique to Vaiṣṇava bhakti</td><td class="note">Yaśodā's relation to the child Kṛṣṇa; Nanda's paternal relationship</td></tr>
+        <tr><td class="shastra">Mādhurya</td><td><span class="dn" style="font-size:14px;">माधुर्य</span></td><td>Erotic love (the sweetest rasa, from which the bhakti-rasa takes its name); the soul's relation to Kṛṣṇa as lover</td><td>Corresponds to śṛṅgāra (erotic) rasa; elevated to the highest theological register</td><td class="note">The gopīs of Vṛndāvana; Rādhā as the supreme exemplar of all bhakti</td></tr>
+      </tbody>
+    </table>
+    <div class="callout" style="margin-top:12px;">
+      <div class="cl-head">The Śāstric Achievement</div>
+      <p style="font-size:14.5px;">Rūpa Gosvāmī's synthesis of Nāṭyaśāstra rasa theory with Bhāgavata Purāṇa bhakti theology is one of the most creative acts of cross-śāstric appropriation in the entire medieval period. By demonstrating that devotional experience generates genuine <em>rasas</em> — aesthetic sentiments with a formal internal structure of sthāyibhāva (permanent emotion), vyabhicāribhāva (transient emotions), vibhāva (causes), and anubhāva (physical manifestations) — Rūpa Gosvāmī places bhakti within the highest category of human experience that the Sanskrit aesthetic tradition recognises. Devotion is not merely a religious feeling; it is a formal art.</p>
+    </div>
+  </div>
+
+  <div class="footer-nav">
+    <span class="fn-btn" onclick="showSection('s-vedanta-schools')">← §1 Vedānta</span>
+    <span class="fn-btn" onclick="showSection('s-navya-nyaya')">Next: §3 Navya-Nyāya →</span>
+  </div>
+</section>
+
+<!-- §3 NAVYA-NYAYA -->
+<section class="section hidden" id="s-navya-nyaya">
+  <div class="section-heading"><span class="num">§ 3</span>Navya-Nyāya</div>
+  <h2 class="article-title">Navya-Nyāya — The Logic Revolution and the Birth of Technical Sanskrit</h2>
+  <p>The <span class="iast">Navya-Nyāya</span> ("New Logic") school, founded by Gaṅgeśa Upādhyāya of Mithilā (c. 1320 CE) with his <span class="iast">Tattvacintāmaṇi</span> ("The Thought-Jewel of Reality"), represents the most radical methodological innovation in the entire history of Indian philosophy: the invention of a formal technical language — a metalanguage for philosophical discourse — that allows philosophical claims to be stated with a precision approaching formal logic. Navya-Nyāya did not merely add new philosophical content to the tradition; it invented a new <em>medium</em> for philosophical expression that made the tradition's claims for the first time formally verifiable.</p>
+
+  <div class="panel logic">
+    <h3>The Technical Language of Navya-Nyāya — Core Concepts</h3>
+    <table class="chron">
+      <thead><tr><th style="width:22%">Technical Term</th><th style="width:20%">Sanskrit</th><th>Meaning &amp; Function</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="shastra">Avacchedaka</td>
+          <td><span class="dn" style="font-size:14px;">अवच्छेदक</span></td>
+          <td class="note">A "limitor" — the property that specifies or delimits another property's scope of application. Navya-Nyāya introduces this to avoid the classical Nyāya's imprecision about the domain of properties: "the pot is knowable" needs specification by the "pot-ness" (ghaṭatva) avacchedaka.</td>
+        </tr>
+        <tr>
+          <td class="shastra">Nirūpaka / Nirūpya</td>
+          <td><span class="dn" style="font-size:14px;">निरूपक / निरूप्य</span></td>
+          <td class="note">The "conditioner" and the "conditioned" — expressing the relational structure of cognition, property, and property-bearer with precision impossible in ordinary Sanskrit. A relation (sambandha) is always between a nirūpaka (that which conditions) and a nirūpya (that which is conditioned).</td>
+        </tr>
+        <tr>
+          <td class="shastra">Vyāpti</td>
+          <td><span class="dn" style="font-size:14px;">व्याप्ति</span></td>
+          <td class="note">Pervasion — the logical relation between reason (hetu) and conclusion (sādhya) in inference. Navya-Nyāya gives vyāpti its definitive technical formulation: "the hetu's occurrence is always accompanied by the sādhya's occurrence" — expressed with avacchedaka precision to eliminate all counterexample-induced ambiguity.</td>
+        </tr>
+        <tr>
+          <td class="shastra">Anuyogin / Pratiyogin</td>
+          <td><span class="dn" style="font-size:14px;">अनुयोगिन् / प्रतियोगिन्</span></td>
+          <td class="note">The "relatum" and "correlatum" of any relational pair. Every relational statement (A is related to B) is analysed into which term is the anuyogin (the one from which the relation is stated) and which the pratiyogin (the one toward which it points) — eliminating the classical logic's ambiguities about the direction of relations.</td>
+        </tr>
+        <tr>
+          <td class="shastra">Viśeṣyatā / Prakāratā</td>
+          <td><span class="dn" style="font-size:14px;">विशेष्यता / प्रकारता</span></td>
+          <td class="note">The "qualificand-hood" and "qualifier-hood" of a cognition — the two poles of any determinate (savikalpaka) perception. Navya-Nyāya insists that every cognition has a formal structure: there is something that is qualified (viśeṣya) and something doing the qualifying (prakāra), and these roles must be precisely specified.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel case-study">
+    <div class="cs-header">
+      <div class="cs-num">CS·15</div>
+      <div class="cs-meta">
+        <div class="cs-label">Case Study 15 · Formal Logic</div>
+        <h3>The Definition of Vyāpti — Classical vs. Navya-Nyāya</h3>
+        <div class="cs-sub">How a single logical concept required five increasingly precise reformulations over three centuries</div>
+      </div>
+    </div>
+    <p>The concept of <span class="iast">vyāpti</span> (logical pervasion — the relation that grounds inference: "where there is smoke, there is fire") is as old as the Nyāya Sūtras (c. 2nd century CE). But the classical Nyāya definition — "the hetu always occurs with the sādhya" — was found to admit counterexamples and ambiguities. The Navya-Nyāya project of defining vyāpti precisely required, according to Ingalls (1951) and Matilal (1968), at least five successive reformulations over the period 1320–1550 CE:</p>
+    <div class="timeline">
+      <div class="tl-item milestone">
+        <div class="tl-date">Gaṅgeśa · c. 1320 CE</div>
+        <div class="tl-title">First Navya-Nyāya Definition</div>
+        <div class="tl-body">Vyāpti as absence of the sādhya's counterpositive being limited by the hetu's delimiting property — first use of avacchedaka to specify the domain of the universal relation. Eliminates some classical counterexamples but generates new ones.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Jayadeva Pakṣadhara · c. 1380 CE</div>
+        <div class="tl-title">Refinement — Eliminating the Upādhi</div>
+        <div class="tl-body">Addresses the problem of the upādhi (adventitious condition) — cases where the hetu and sādhya co-occur not necessarily but only due to an external condition. Refines the avacchedaka structure to exclude upādhi-based co-occurrences.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Vāsudeva Sārvabhauma · c. 1450 CE</div>
+        <div class="tl-title">Bengal School Contribution</div>
+        <div class="tl-body">The Bengal (Navadvīpa) school's reformulation — adds the requirement that the absence conditioning vyāpti must itself be specified by the delimitor of the hetu's occurrence, generating a more recursively precise structure.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Raghunātha Śiromaṇi · c. 1475–1550 CE</div>
+        <div class="tl-title">Definitive Formulation</div>
+        <div class="tl-body">Raghunātha's <em>Dīdhiti</em> commentary on Gaṅgeśa provides the formulation accepted by later Navya-Nyāya as standard — a sentence in technical Navya-Nyāya notation requiring over a hundred Sanskrit words to express what would take three in ordinary language, but which successfully excludes all known counterexamples.</div>
+      </div>
+    </div>
+    <div class="callout jade">
+      <div class="cl-head">The Epistemological Achievement</div>
+      <p style="font-size:14.5px;">The Navya-Nyāya project of defining vyāpti is directly comparable to the development of formal predicate logic in European philosophy: Russell and Whitehead's <em>Principia Mathematica</em> (1910–13) required a comparably laborious formalisation of logical relations that ordinary language captures approximately but imprecisely. The difference is that Navya-Nyāya developed its formal language entirely within Sanskrit and entirely within the śāstric commentary tradition — precision achieved through the refinement of inherited concepts rather than through the invention of symbolic notation. The achievement is arguably the more impressive for working within the inherited linguistic medium.</p>
+    </div>
+  </div>
+
+  <h3 class="sub-title">3.1 The Navya-Nyāya Impact — A Logic That Changed All the Other Śāstras</h3>
+  <p>Navya-Nyāya did not remain confined to the philosophical school from which it emerged. By the 15th–17th centuries, the technical apparatus of Navya-Nyāya had been absorbed into virtually every śāstric tradition — Vedānta, Mīmāṃsā, Vyākaraṇa, Dharmaśāstra — as a universal metalanguage for precise philosophical argumentation. The Navya-Nyāya style of technical Sanskrit became the professional language of Indian academic philosophy in the same way that mathematical notation became the professional language of European science: non-optional for serious practitioners, opaque to the uninitiated, and extraordinarily powerful for those within the tradition.</p>
+
+  <div class="footer-nav">
+    <span class="fn-btn" onclick="showSection('s-bhakti-shastra')">← §2 Bhakti</span>
+    <span class="fn-btn" onclick="showSection('s-smarta')">Next: §4 Smārta →</span>
+  </div>
+</section>
+
+<!-- §4 SMARTA -->
+<section class="section hidden" id="s-smarta">
+  <div class="section-heading"><span class="num">§ 4</span>Smārta Synthesis</div>
+  <h2 class="article-title">The Smārta Framework — A Non-Sectarian Synthesis Within Śāstra</h2>
+  <p>The <span class="iast">Smārta</span> tradition — those who follow the <span class="iast">smṛti</span> rather than any single sectarian Āgama as their primary authority — represents one of the most intellectually sophisticated responses to the problem of sectarian pluralism in Indian religious history. Its characteristic achievement is the <span class="iast">pañcāyatana</span> ("five shrines") synthesis attributed to Śaṅkarācārya: the integration of five deities (Śiva, Viṣṇu, Śakti, Sūrya, and Gaṇeśa) as five equally valid forms of the single Brahman within a single household's ritual practice.</p>
+
+  <div class="panel syn">
+    <h3>The Pañcāyatana — Five Deities, One Brahman</h3>
+    <div class="grid3" style="margin-top:14px;">
+      <div class="panel" style="text-align:center;border-color:rgba(156,61,170,0.5);">
+        <div class="dn" style="font-size:32px;color:#cc78dd;">शिव</div>
+        <div style="font-family:'Cinzel';font-size:12px;color:#cc78dd;margin:6px 0;">Śiva</div>
+        <div style="font-size:13px;color:var(--text-faint);">The auspicious — consciousness, dissolution, ascetic wisdom. Presided over by the Śaiva Āgama tradition; here integrated as one expression of non-dual Brahman.</div>
+      </div>
+      <div class="panel" style="text-align:center;border-color:rgba(201,168,106,0.5);">
+        <div class="dn" style="font-size:32px;color:var(--gold-bright);">विष्णु</div>
+        <div style="font-family:'Cinzel';font-size:12px;color:var(--gold-bright);margin:6px 0;">Viṣṇu</div>
+        <div style="font-size:13px;color:var(--text-faint);">The all-pervading preserver — cosmic order, avatāra theology, bhakti path. Presided over by the Pāñcarātra and Vaikhānasa Āgamas.</div>
+      </div>
+      <div class="panel" style="text-align:center;border-color:rgba(184,122,48,0.5);">
+        <div class="dn" style="font-size:32px;color:var(--syn-bright);">शक्ति</div>
+        <div style="font-family:'Cinzel';font-size:12px;color:var(--syn-bright);margin:6px 0;">Devī / Śakti</div>
+        <div style="font-size:13px;color:var(--text-faint);">The Goddess — cosmic power, Śākta Tantra, the mother who both binds and liberates. Includes all forms from Durgā to Lalitā.</div>
+      </div>
+      <div class="panel" style="text-align:center;border-color:rgba(208,96,48,0.5);">
+        <div class="dn" style="font-size:32px;color:#d06030;">सूर्य</div>
+        <div style="font-family:'Cinzel';font-size:12px;color:#d06030;margin:6px 0;">Sūrya</div>
+        <div style="font-size:13px;color:var(--text-faint);">The sun deity — light, cognition, the Vedic Āditya tradition, the Saurapurāṇa. The most ancient Vedic deity integrated into post-Vedic theism.</div>
+      </div>
+      <div class="panel" style="text-align:center;border-color:rgba(138,120,221,0.5);">
+        <div class="dn" style="font-size:32px;color:var(--jade-bright);">गणेश</div>
+        <div style="font-family:'Cinzel';font-size:12px;color:var(--jade-bright);margin:6px 0;">Gaṇeśa</div>
+        <div style="font-size:13px;color:var(--text-faint);">The remover of obstacles — beginnings, thresholds, writing, commerce. Presided over by the Gāṇapatya sect; universally invoked across all Hindu traditions.</div>
+      </div>
+      <div class="panel" style="text-align:center;border-color:var(--border);background:rgba(201,168,106,0.04);">
+        <div class="dn" style="font-size:32px;color:var(--gold);">ब्रह्म</div>
+        <div style="font-family:'Cinzel';font-size:12px;color:var(--gold);margin:6px 0;">Brahman — The Unity</div>
+        <div style="font-size:13px;color:var(--text-faint);">All five are equally valid forms of the one non-dual Brahman. The practitioner's chosen deity (iṣṭadevatā) is placed at the centre; the others surround it — all equally real, all ultimately the same.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="cl-head">The Philosophical Architecture of Smārta Synthesis</div>
+    <p style="font-size:15px;">The pañcāyatana synthesis is not theological eclecticism — it is a philosophically rigorous position derived from Advaita Vedānta. If Brahman is the one non-dual reality and all deities are forms of Brahman, then the choice between Śiva, Viṣṇu, and Devī is not a metaphysical choice (they are the same ultimate reality) but a matter of <em>adhikāra</em> (qualification, temperamental fit) — different paths appropriate to different practitioners. The Smārta position does not require one to believe Śiva is "really" Viṣṇu or vice versa; it requires one to hold the Advaita insight that all personal deities are ultimately inadequate designations of the non-personal Brahman, and therefore no one designation is more accurate than another. This is the most sophisticated available response to sectarian plurality short of abandoning theism altogether.</p>
+  </div>
+
+  <h3 class="sub-title">4.1 Ādi Śaṅkara's Institutional Achievement — The Pīṭha System</h3>
+  <p>Alongside the doctrinal synthesis of Advaita Vedānta, Śaṅkara's most consequential practical achievement was the establishment of four maṭhas (monastic centres) at the four cardinal directions of the Indian subcontinent, each entrusted with one of the four Vedas and presided over by a Śaṅkarācārya — a title held in lineal succession to the present day:</p>
+  <table class="chron" style="margin-top:14px;">
+    <thead><tr><th>Pīṭha</th><th>Location</th><th>Veda</th><th>Direction</th><th>Mahāvākya</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="shastra">Śārada Pīṭha</td>
+        <td>Dwāraka (Gujarat)</td>
+        <td>Sāmaveda</td>
+        <td class="era">West</td>
+        <td class="note"><span class="iast">Tattvamasi</span> — "That thou art" (Chāndogya Upaniṣad)</td>
+      </tr>
+      <tr>
+        <td class="shastra">Jyotir Maṭha</td>
+        <td>Badrinath (Uttarakhand)</td>
+        <td>Atharvaveda</td>
+        <td class="era">North</td>
+        <td class="note"><span class="iast">Ayamātmā Brahma</span> — "This self is Brahman" (Māṇḍūkya Upaniṣad)</td>
+      </tr>
+      <tr>
+        <td class="shastra">Govardhana Pīṭha</td>
+        <td>Puri (Odisha)</td>
+        <td>Ṛgveda</td>
+        <td class="era">East</td>
+        <td class="note"><span class="iast">Prajñānam Brahma</span> — "Consciousness is Brahman" (Aitareya Upaniṣad)</td>
+      </tr>
+      <tr>
+        <td class="shastra">Śṛṅgeri Śāradā Pīṭha</td>
+        <td>Śṛṅgeri (Karnataka)</td>
+        <td>Yajurveda</td>
+        <td class="era">South</td>
+        <td class="note"><span class="iast">Aham Brahmāsmi</span> — "I am Brahman" (Bṛhadāraṇyaka Upaniṣad)</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:14.5px;margin-top:12px;">The four-pīṭha system is Śaṅkara's institutional answer to the problem of canonical transmission: by assigning each of the four Vedas to one of the four directions and one of the four mahāvākyas (great sayings — the Upaniṣadic formulas of non-dual identity), Śaṅkara created a mnemonic and institutional grid within which the entire Vedic revelation is perpetually renewed. Each pīṭha is a node in a network of śāstric transmission — an institution that serves the same preservative function as the ancient pathaśālā, but at a national scale.</p>
+
+  <div class="footer-nav">
+    <span class="fn-btn" onclick="showSection('s-navya-nyaya')">← §3 Navya-Nyāya</span>
+    <span class="fn-btn" onclick="showSection('s-commentary')">Next: §5 Commentary →</span>
+  </div>
+</section>
+
+<!-- §5 COMMENTARY -->
+<section class="section hidden" id="s-commentary">
+  <div class="section-heading"><span class="num">§ 5</span>The Art of Commentary</div>
+  <h2 class="article-title">Bhāṣya as Creative Śāstra — Commentary as the Primary Medium of Medieval Thought</h2>
+  <p>The dominant literary form of the medieval Indian intellectual tradition is not the independent treatise but the <span class="iast">bhāṣya</span> (authoritative commentary) — the systematic, line-by-line explication of a canonical sūtra or primary text. This dominance of commentary over independent composition is not a sign of intellectual timidity; it is the direct consequence of the śāstric tradition's structure. Because the sūtra texts are the shared canonical foundation, and because philosophical authority derives from the ability to demonstrate that one's position is the correct interpretation of the sūtra, the bhāṣya is the natural site for philosophical creativity. The medieval Indian thinker is creative precisely through interpretation.</p>
+
+  <div class="panel syn">
+    <h3>The Medieval Commentary Hierarchy — Layers of Interpretation</h3>
+    <table class="compare">
+      <thead><tr><th>Genre</th><th>Sanskrit</th><th>Function</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Sūtra</strong></td><td class="iast">सूत्र</td><td>The terse canonical text — typically 3–5 Sanskrit words per aphorism; intelligible only with commentary</td><td>Brahmasūtra of Bādarāyaṇa; Mīmāṃsā Sūtra of Jaimini</td></tr>
+        <tr><td><strong>Bhāṣya</strong></td><td class="iast">भाष्य</td><td>The primary authoritative commentary — the author's full philosophical position expressed through the explication of the sūtra; the creative philosophical act</td><td>Śaṅkara's Brahmasūtra-bhāṣya; Rāmānuja's Śrī Bhāṣya</td></tr>
+        <tr><td><strong>Vārttika</strong></td><td class="iast">वार्त्तिक</td><td>Critical annotations on the bhāṣya — supplying what was left unsaid, correcting errors, extending arguments</td><td>Sureśvara's Naiṣkarmyasiddhi (Advaita vārttika on Śaṅkara)</td></tr>
+        <tr><td><strong>Ṭīkā / Vyākhyā</strong></td><td class="iast">टीका / व्याख्या</td><td>Sub-commentary on the bhāṣya — explaining the bhāṣya's own difficult passages, often introducing further philosophical refinements</td><td>Vācaspati Miśra's Bhāmatī (ṭīkā on Śaṅkara's bhāṣya)</td></tr>
+        <tr><td><strong>Ṭippaṇī / Vivaraṇa</strong></td><td class="iast">टिप्पणी / विवरण</td><td>Glosses on the ṭīkā — the outermost layer of the commentary tradition; sometimes further refined by additional layers</td><td>Appayya Dīkṣita's work on the Advaita ṭīkā tradition</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel case-study">
+    <div class="cs-header">
+      <div class="cs-num">CS·16</div>
+      <div class="cs-meta">
+        <div class="cs-label">Case Study 16 · Commentary as Creation</div>
+        <h3>Vācaspati Miśra — The Bhāmatī and the Vivaraṇa Schools</h3>
+        <div class="cs-sub">How a single sub-commentary generated two distinct Advaita sub-schools with irreconcilable positions on the locus of avidyā</div>
+      </div>
+    </div>
+    <p>Vācaspati Miśra (c. 840–900 CE) wrote the <span class="iast">Bhāmatī</span>, a sub-commentary on Śaṅkara's Brahmasūtra-bhāṣya, in which he offered a specific interpretation of Śaṅkara's doctrine of avidyā (nescience): that avidyā resides in the individual self (jīva). This interpretive choice — a single sentence in a sub-commentary — generated one of the two major sub-schools of Advaita Vedānta, the <em>Bhāmatī school</em>.</p>
+    <p>Simultaneously, Prakāśātman (c. 10th century) wrote the <span class="iast">Vivaraṇa</span>, a commentary on Padmapāda's Pañcapādikā (itself a commentary on Śaṅkara's bhāṣya), which located avidyā in Brahman itself (or more precisely, in Brahman as conditioned by māyā). This generated the competing <em>Vivaraṇa school</em>.</p>
+    <div class="grid2" style="margin-top:14px;">
+      <div class="debate-col left">
+        <div class="dc-h">Bhāmatī School</div>
+        <p style="font-size:13.5px;">Avidyā resides in the individual jīva. Each individual has their own avidyā; liberation is the removal of one jīva's avidyā, not the dissolution of cosmic avidyā. The locus-problem: if the jīva is itself a product of avidyā, how can it be its locus? The school's resolution involves the concept of <em>anyonyāśraya</em> (mutual dependence) that is not vicious circularity but the structure of beginningless appearance.</p>
+      </div>
+      <div class="debate-col right" style="border-color:var(--jade-bright);">
+        <div class="dc-h" style="color:var(--jade-bright);">Vivaraṇa School</div>
+        <p style="font-size:13.5px;">Avidyā resides in Brahman (as Brahman qualified by māyā). This avoids the Bhāmatī's circularity but raises its own problem: how can omniscient Brahman be the locus of nescience? The school's resolution invokes the distinction between Brahman-as-pure-consciousness and Brahman-as-the-cosmic-player-of-appearances — the locus is Brahman in its self-concealing role.</p>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:14px;">
+      <div class="cl-head">The Creative Power of Commentary</div>
+      <p style="font-size:14.5px;">The Bhāmatī–Vivaraṇa divide is generated entirely within the commentary tradition — neither school's founder is departing from Śaṅkara's text, and both claim to be faithfully interpreting it. The dispute is about what Śaṅkara <em>must have meant</em>, given his other commitments. This is commentary as philosophical argument: the creative act is the interpretation, and the stakes of the creative act are a complete ontological position about the nature of ignorance and liberation.</p>
+    </div>
+  </div>
+
+  <div class="footer-nav">
+    <span class="fn-btn" onclick="showSection('s-smarta')">← §4 Smārta</span>
+    <span class="fn-btn" onclick="showSection('s-regional')">Next: §6 Regional →</span>
+  </div>
+</section>
+
+<!-- §6 REGIONAL TRANSMISSION -->
+<section class="section hidden" id="s-regional">
+  <div class="section-heading"><span class="num">§ 6</span>Regional Transmission</div>
+  <h2 class="article-title">Regional Syntheses — South Indian and North Indian Convergences</h2>
+  <p>The medieval synthesis is not a single geographically centralised event but a distributed set of regional intellectual projects, each responding to local political, social, and linguistic conditions while contributing to a shared pan-Indian śāstric conversation. The regional character of medieval Indian thought is one of its defining features: major schools are identified with specific cities and regions (Kashmir Śaivism with Kashmir; Navya-Nyāya with Mithilā and Navadvīpa; Viśiṣṭādvaita with Śrīraṅgam and Kāñcīpuram; Dvaita with Uḍupi), and the transmission of śāstric learning across these regional boundaries is a specific historical process worth examining.</p>
+
+  <div class="panel research">
+    <h3>The Tamil–Sanskrit Synthesis — Two Canonical Traditions in Dialogue</h3>
+    <p>The Vaiṣṇava intellectual tradition of South India produced the most fully realised bilingual śāstric canon in Indian history: the <span class="iast">Ubhaya Vedānta</span> (dual Vedānta) of the Śrī Vaiṣṇava community, which treats the Sanskrit Vedic-Vedāntic corpus and the Tamil Prabandhams of the Āḷvārs as co-equal revelatory canons. This is not merely symbolic elevation of vernacular poetry to scriptural status — it has formal śāstric consequences:</p>
+    <div class="grid2" style="margin-top:14px;">
+      <div class="panel bhakti">
+        <h3>The Nālāyira Divya Prabandham</h3>
+        <p style="font-size:14.5px;">The 4,000 Tamil verses of the 12 Āḷvār poet-saints (c. 6th–9th century CE), compiled by Nāthamuni (c. 10th century CE), are given the status of the "Tamil Veda" (Drāmiḍopaniṣad) in the Śrī Vaiṣṇava community. Rāmānuja's philosophical system draws on both the Sanskrit Brahmasūtra and the Tamil Prabandham — the <em>Śrī Bhāṣya</em>'s arguments are grounded in philosophical Sanskrit, but the experiential reality they describe is the devotional universe of Nammāḷvār's <em>Tiruvāymoḷi</em>.</p>
+      </div>
+      <div class="panel syn">
+        <h3>Vedāntic Formalisation of Bhakti Experience</h3>
+        <p style="font-size:14.5px;">The Śrī Vaiṣṇava achievement is the formalisation of an experiential tradition (Tamil bhakti poetry) into a systematic philosophical framework (Viśiṣṭādvaita Vedānta) without losing the experiential content. Piḷḷai Lokācārya's <em>Śrīvacanabhūṣaṇam</em> (c. 14th century) takes the Tamil devotional insights and formulates them in a technical śāstric framework of 463 sūtras — Tamil bhakti theology in Sanskrit sūtra form. This translation across linguistic medium without loss of content is one of the most remarkable achievements of the medieval period.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel case-study">
+    <div class="cs-header">
+      <div class="cs-num">CS·17</div>
+      <div class="cs-meta">
+        <div class="cs-label">Case Study 17 · Regional School</div>
+        <h3>Navadvīpa (Bengal) — The Navya-Nyāya and Bhakti Convergence</h3>
+        <div class="cs-sub">How a single city in 15th–16th century Bengal became simultaneously the centre of formal logic and the centre of devotional revolution</div>
+      </div>
+    </div>
+    <p>Navadvīpa (Nabadwip, Bengal) in the late 15th and early 16th century presents one of the most remarkable juxtapositions in Indian intellectual history: it was simultaneously the leading centre of Navya-Nyāya philosophical logic (with Raghunātha Śiromaṇi, Vāsudeva Sārvabhauma, and their students producing the most technically demanding philosophical Sanskrit of the medieval period) and the birthplace and early context of Śrī Caitanya Mahāprabhu (1486–1534 CE), whose Gauḍīya Vaiṣṇava bhakti movement constituted the most emotionally intense and socially transformative devotional revolution of the medieval period.</p>
+    <div class="callout">
+      <div class="cl-head">The Paradox and Its Resolution</div>
+      <p style="font-size:14.5px;">The coexistence of Navya-Nyāya formalism and Bhakti intensity in Navadvīpa is not accidental — it reflects the city's status as a centre of Sanskrit learning that attracted the full range of śāstric enterprise. Caitanya himself studied the Navya-Nyāya tradition before his devotional transformation. His disciple Jīva Gosvāmī's <em>Ṣaṭ-sandarbhas</em> (Six Essays) represent the most technically sophisticated philosophical justification of Gauḍīya Vaiṣṇava theology: they deploy Navya-Nyāya terminology and Vedāntic argumentation in defence of bhakti as the supreme philosophical position. The meeting of logic and devotion in Navadvīpa produced a tradition that was neither purely rationalist nor purely experiential but genuinely both simultaneously.</p>
+    </div>
+  </div>
+
+  <h3 class="sub-title">6.1 The Deccan Synthesis — Vijñānabhikṣu and the Last Great Medieval Project</h3>
+  <p>The most ambitious synthetic project of the late medieval period is that of Vijñānabhikṣu (c. 1550–1600 CE), a Brahmin philosopher of the Deccan who attempted to demonstrate the fundamental compatibility of the Sāṃkhya, Yoga, and Vedānta philosophical systems — three traditions that had been in explicit disagreement for over a millennium. His major works — the <span class="iast">Sāṃkhyapravacanabhāṣya</span> (commentary on the Sāṃkhya Sūtras), the <span class="iast">Yogavārttika</span> (commentary on the Yoga Sūtras), and the <span class="iast">Vijñānāmṛta Bhāṣya</span> (commentary on the Brahmasūtras) — read the three systems as three descriptions of the same reality at different levels of resolution. Vijñānabhikṣu's Brahman is not Śaṅkara's nirguṇa abstraction but an active, personal God who creates through Sāṃkhya's prakṛti and is approached through Yoga's disciplined practice — a theistic Vedānta that is neither Advaita nor Viśiṣṭādvaita but a third possibility that the tradition had not previously articulated with comparable precision.</p>
+
+  <div class="footer-nav">
+    <span class="fn-btn" onclick="showSection('s-commentary')">← §5 Commentary</span>
+    <span class="fn-btn" onclick="showSection('s-cross-tradition')">Next: §7 Debate →</span>
+  </div>
+</section>
+
+<!-- §7 CROSS-TRADITIONAL DEBATE -->
+<section class="section hidden" id="s-cross-tradition">
+  <div class="section-heading"><span class="num">§ 7</span>The Medieval Dialectic</div>
+  <h2 class="article-title">Cross-Traditional Debate — The Structure of Medieval Philosophical Controversy</h2>
+  <p>The medieval Indian philosophical tradition is characterised not merely by the production of distinct schools but by the elaborate and formally structured process of inter-school debate. The <span class="iast">pūrvapakṣa–uttarapakṣa</span> structure (opponent's view — response) — already present in the Brahmasūtras themselves — becomes in the medieval period an extraordinarily elaborate formal genre in which an entire opposing school's arguments are presented, often with more precision and generosity than the opponents themselves had managed, before being systematically refuted. Understanding the formal structure of medieval debate is essential to understanding how the tradition achieved its remarkable combination of diversity and coherence.</p>
+
+  <div class="panel syn">
+    <h3>The Formal Structure of a Medieval Philosophical Debate</h3>
+    <table class="chron">
+      <thead><tr><th style="width:20%">Stage</th><th style="width:18%">Sanskrit Term</th><th>Content</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="shastra">Statement of the Topic</td>
+          <td><span class="dn" style="font-size:14px;">विषय</span> <span class="iast">Viṣaya</span></td>
+          <td>The sūtra or canonical passage that is the subject of discussion</td>
+          <td class="note">Establishes the shared textual authority from which all parties begin — the ground rules of the debate</td>
+        </tr>
+        <tr>
+          <td class="shastra">Doubt</td>
+          <td><span class="dn" style="font-size:14px;">संशय</span> <span class="iast">Saṃśaya</span></td>
+          <td>The genuinely open question — the point on which reasonable readers of the text might disagree</td>
+          <td class="note">Identifies precisely what is at stake — not every disagreement but this specific disagreement about this text</td>
+        </tr>
+        <tr>
+          <td class="shastra">Prima Facie View</td>
+          <td><span class="dn" style="font-size:14px;">पूर्वपक्ष</span> <span class="iast">Pūrvapakṣa</span></td>
+          <td>The opponent's best-case position — presented at full strength, with all its supporting arguments</td>
+          <td class="note">The most intellectually generous aspect of the system: the tradition insists on steelmanning the opponent</td>
+        </tr>
+        <tr>
+          <td class="shastra">Refutation</td>
+          <td><span class="dn" style="font-size:14px;">उत्तर</span> <span class="iast">Uttara / Siddhānta</span></td>
+          <td>The respondent's systematic answer to each argument of the pūrvapakṣa, establishing their own position</td>
+          <td class="note">The creative philosophical act — not mere rejection but demonstration of the opponent's error and the correct view's superiority</td>
+        </tr>
+        <tr>
+          <td class="shastra">Conclusion</td>
+          <td><span class="dn" style="font-size:14px;">सिद्धान्त</span> <span class="iast">Siddhānta</span></td>
+          <td>The established conclusion — the position that stands after the refutation of all viable alternatives</td>
+          <td class="note">The siddhānta's authority is conditional: it holds until a more powerful argument is produced. No conclusion is permanently immune to further debate.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel case-study">
+    <div class="cs-header">
+      <div class="cs-num">CS·18</div>
+      <div class="cs-meta">
+        <div class="cs-label">Case Study 18 · The Central Medieval Debate</div>
+        <h3>Advaita vs. Viśiṣṭādvaita — The Debate on the Nature of Brahman's Causal Relation</h3>
+        <div class="cs-sub">The single most technically precise, most thoroughly argued philosophical debate of the entire medieval period</div>
+      </div>
+    </div>
+    <p>The debate between Advaita Vedānta and Viśiṣṭādvaita Vedānta on the nature of Brahman's relationship to the world — the <em>vivartavāda</em> (appearance theory) vs. <em>pariṇāmavāda</em> (transformation theory) controversy — is the most consequential single philosophical dispute of medieval India. It generated some of the most technically demanding Sanskrit philosophical prose ever composed: Rāmānuja's <em>saptānupapatti</em> (seven impossibilities) against Advaita, and Śrī Harṣa's <em>Khaṇḍanakhaṇḍakhādya</em> (c. 1150 CE) — a Navya-Nyāya-style attack on all Nyāya definitions — represent opposite ends of this debate's stylistic range.</p>
+
+    <blockquote>
+      यद्यनिर्वचनीयं तदसदेव स्यात् — यस्य हि स्वरूपं वक्तुं न शक्यते तन्निरस्तसर्वसम्बन्धं शुद्धाभावरूपमेव स्यात् ।
+      <cite>Rāmānuja, Śrī Bhāṣya — "If it is inexplicable, it would simply be non-existent — for that whose nature cannot be stated would have all relations negated and would be of the nature of pure absence."</cite>
+    </blockquote>
+
+    <div class="grid2">
+      <div class="panel vedanta">
+        <h3>Advaita's Response to Rāmānuja</h3>
+        <p style="font-size:14.5px;">The Advaita counter-argument (developed by Śrī Harṣa, Citsukha, and Madhusūdana Sarasvatī) concedes that <em>anirvacanīya</em> (inexplicability) is formally unusual but argues that Rāmānuja's alternative — a real transformation of Brahman — generates equal or greater difficulties. If Brahman really transforms into the world, either Brahman changes (contradicting its eternality) or its essence is the transformation itself (collapsing the distinction between Creator and creation that Rāmānuja needs). The Advaita claim is not that the world is <em>nothing</em> but that its ontological status requires a new category beyond sat and asat.</p>
+      </div>
+      <div class="panel bhakti">
+        <h3>Rāmānuja's Viśiṣṭādvaita Position</h3>
+        <p style="font-size:14.5px;">Rāmānuja's <em>Śrī Bhāṣya</em> attacks the Advaita position through the seven impossibilities (saptānupapatti): the impossibility of specifying the locus of avidyā, the impossibility of pure undifferentiated consciousness serving as the referent of "Brahman," the impossibility of valid knowledge arising from an avidyā-ridden system, and four others. The point is not mere polemics: each impossibility targets a genuine structural feature of the Advaita system and demands a reply. The debate's extraordinary productivity derives from the fact that each response generates a new objection — a debate that continued productively for over five centuries.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="cl-head">The Medieval Dialectic's Contribution to the Śāstric Tradition</div>
+    <p style="font-size:15px;">The medieval cross-traditional debate is the śāstric tradition's crowning intellectual achievement in one specific sense: it demonstrates that the śāstric method — systematic, rule-governed, formally argued — is robust enough to sustain productive disagreement over multiple centuries and across mutually antagonistic schools. The Advaita–Viśiṣṭādvaita–Dvaita triangle did not resolve itself; it sharpened itself. Each school's engagement with the others produced more precise formulations of its own positions, more careful analyses of its key concepts, and more rigorous critiques of its central claims. The tradition as a whole is more philosophically sophisticated at the end of the medieval period than at its beginning — not despite the disagreements but because of them. This is the śāstric method's deepest vindication.</p>
+  </div>
+
+  <div class="footer-nav">
+    <span class="fn-btn" onclick="showSection('s-regional')">← §6 Regional</span>
+    <span class="fn-btn" onclick="showSection('s-chrono4')">Next: §8 Chronology →</span>
+  </div>
+</section>
+
+<!-- §8 CHRONOLOGY -->
+<section class="section hidden" id="s-chrono4">
+  <div class="section-heading"><span class="num">§ 8</span>Master Chronology IV</div>
+  <h2 class="article-title">Reference Chronology IV: The Medieval Synthesis (c. 700–1600 CE)</h2>
+
+  <div class="panel">
+    <h3>Medieval Synthesis Timeline</h3>
+    <table class="chron">
+      <thead><tr><th style="width:17%">Date</th><th style="width:25%">Text / Figure / Event</th><th style="width:18%">Tradition</th><th>Significance</th></tr></thead>
+      <tbody>
+        <tr><td class="era">c. 700–750 CE</td><td class="shastra">Śaṅkarācārya — Brahmasūtra-bhāṣya, Upadeśasāhasrī, Vivekacūḍāmaṇi</td><td><span class="tag vedanta">Advaita</span></td><td class="note">The founding documents of Advaita Vedānta; the most comprehensive single philosophical synthesis of the Vedic tradition; establishment of the four pīṭha institutions; sets the terms for all subsequent Vedāntic debate</td></tr>
+        <tr><td class="era">c. 820–900 CE</td><td class="shastra">Maṇḍana Miśra — Brahmasiddhi; Vācaspati Miśra — Bhāmatī</td><td><span class="tag vedanta">Advaita</span></td><td class="note">Maṇḍana's independent Advaita position (avidyā in jīva, sharply distinct from Śaṅkara on certain points); Vācaspati's sub-commentary generates the Bhāmatī school, the first major Advaita sub-tradition</td></tr>
+        <tr><td class="era">c. 900–950 CE</td><td class="shastra">Nāthamuni — compilation of Nālāyira Divya Prabandham</td><td><span class="tag bhakti">Śrī Vaiṣṇava</span></td><td class="note">The 4,000 Tamil Āḷvār verses compiled and systematised as co-equal revelation alongside the Sanskrit Vedas — the founding act of Ubhaya Vedānta</td></tr>
+        <tr><td class="era">c. 1017–1137 CE</td><td class="shastra">Rāmānujācārya — Śrī Bhāṣya, Vedāntasāra, Vedāntadīpa, Gītābhāṣya</td><td><span class="tag vedanta">Viśiṣṭādvaita</span></td><td class="note">The defining texts of Viśiṣṭādvaita; the saptānupapatti against Advaita; the systematic integration of Āḷvār bhakti experience into Sanskrit Vedāntic framework; the most sophisticated Vaiṣṇava philosophical achievement</td></tr>
+        <tr><td class="era">c. 1150 CE</td><td class="shastra">Śrī Harṣa — Khaṇḍanakhaṇḍakhādya</td><td><span class="tag vedanta">Advaita</span></td><td class="note">The most technically demanding Advaita philosophical text — a Navya-Nyāya-style systematic critique of all Nyāya definitions, demonstrating that Advaita can deploy the most rigorous available logical methods in defence of its anti-realist position</td></tr>
+        <tr><td class="era">c. 1238–1317 CE</td><td class="shastra">Madhvācārya — Brahmasūtra-bhāṣya (Pūrṇaprajña-bhāṣya), Anuvyākhyāna</td><td><span class="tag vedanta">Dvaita</span></td><td class="note">The founding of Dvaita Vedānta; the pañca-bheda (five-fold difference) doctrine; the most thoroughgoing realist ontology in the Vedāntic tradition; explicitly anti-Advaita, anti-Viśiṣṭādvaita</td></tr>
+        <tr><td class="era">c. 1320 CE</td><td class="shastra">Gaṅgeśa Upādhyāya — Tattvacintāmaṇi</td><td><span class="tag logic">Navya-Nyāya</span></td><td class="note">The founding text of Navya-Nyāya; invention of technical philosophical Sanskrit as a formal metalanguage; the most structurally innovative methodological achievement of the medieval period; still the basis of advanced Sanskrit logic study</td></tr>
+        <tr><td class="era">c. 1380–1460 CE</td><td class="shastra">Nimbārkācārya school; Vallabhācārya (b. 1479) — Aṇubhāṣya</td><td><span class="tag vedanta">Bhedābheda/Śuddhādvaita</span></td><td class="note">The fourth and fifth major Vedāntic schools; Vallabha's Kṛṣṇa-centred pure non-dualism becomes the theological foundation of the Puṣṭimārga devotional tradition and its extraordinary artistic output (Braj literature, Haveli music)</td></tr>
+        <tr><td class="era">c. 1475–1550 CE</td><td class="shastra">Raghunātha Śiromaṇi — Dīdhiti; Vāsudeva Sārvabhauma</td><td><span class="tag logic">Navya-Nyāya</span></td><td class="note">The maturation of Navya-Nyāya in the Bengal (Navadvīpa) school; the Dīdhiti's formulation of vyāpti becomes the standard; Navya-Nyāya's technical apparatus now deployed across all śāstric traditions</td></tr>
+        <tr><td class="era">c. 1486–1534 CE</td><td class="shastra">Śrī Caitanya Mahāprabhu — Gauḍīya Vaiṣṇava movement; disciples Rūpa and Sanātana Gosvāmī in Vṛndāvana</td><td><span class="tag bhakti">Gauḍīya Vaiṣṇava</span></td><td class="note">The most emotionally transformative bhakti movement of the medieval period; Rūpa Gosvāmī's systematic formalisation of bhakti-rasa theory; Jīva Gosvāmī's Ṣaṭ-sandarbhas as the philosophical backbone — the simultaneous heights of devotional intensity and śāstric rigour</td></tr>
+        <tr><td class="era">c. 1550–1600 CE</td><td class="shastra">Vijñānabhikṣu — Sāṃkhyapravacanabhāṣya, Yogavārttika, Vijñānāmṛtabhāṣya</td><td><span class="tag syn">Synthesis</span></td><td class="note">The last great medieval synthetic project; the integration of Sāṃkhya, Yoga, and Vedānta into a single theistic framework; Vijñānabhikṣu's work anticipates several themes of the modern neo-Vedānta synthesis and demonstrates the tradition's enduring creative capacity even at the close of the medieval period</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <div class="cl-head">Part IV Conclusion — The Medieval Synthesis as Achievement</div>
+    <p style="font-size:15px;">The medieval period of Indian intellectual history is not a period of consolidation after classical creativity — it is a second classical age of comparable or greater ambition. Four complete philosophical systems were generated from a single canonical text. Devotion was elevated from feeling to formal science. Logic acquired a technical metalanguage more precise than any previous philosophical idiom. Five rival theological traditions were integrated into a non-sectarian ritual framework. Commentary became the primary vehicle of creative thought. Regional traditions produced the most sophisticated bilingual canonical synthesis in Indian history. Each of these achievements is individually remarkable; collectively, they constitute the most productive eight centuries of systematic thought in any premodern civilisation. The synthesis that Part IV examines is not the end of the śāstric tradition — it is its fullest flowering.</p>
+  </div>
+
+  <div class="footnotes">
+    <h4>Selected Bibliography · Part IV</h4>
+    <div class="fn-item"><span class="fn-num">[1]</span>Dasgupta, S. (1922–1955). <em>A History of Indian Philosophy</em>. 5 vols. Cambridge University Press. Volumes II–IV cover the medieval period comprehensively.</div>
+    <div class="fn-item"><span class="fn-num">[2]</span>Matilal, B.K. (1968). <em>The Navya-Nyāya Doctrine of Negation</em>. Harvard University Press. The standard introduction to Navya-Nyāya technical concepts.</div>
+    <div class="fn-item"><span class="fn-num">[3]</span>Carman, J.B. (1974). <em>The Theology of Rāmānuja</em>. Yale University Press. Definitive account of Viśiṣṭādvaita's philosophical structure.</div>
+    <div class="fn-item"><span class="fn-num">[4]</span>Haberman, D.L. (1988). <em>Acting as a Way of Salvation: A Study of Rāgānugā Bhakti Sādhana</em>. Oxford University Press. On Rūpa Gosvāmī's bhakti-rasa system.</div>
+    <div class="fn-item"><span class="fn-num">[5]</span>Lester, R.C. (1966). "Rāmānuja and Śrī-Vaiṣṇavism: The Concept of Prapatti or Śaraṇāgati." <em>History of Religions</em> 5(2): 266–282.</div>
+    <div class="fn-item"><span class="fn-num">[6]</span>Nicholson, A.J. (2010). <em>Unifying Hinduism: Philosophy and Identity in Indian Intellectual History</em>. Columbia University Press. Essential for the Vijñānabhikṣu synthesis and the emergence of "Hindu" as a synthetic category.</div>
+    <div class="fn-item"><span class="fn-num">[7]</span>Ingalls, D.H.H. (1951). <em>Materials for the Study of Navya-Nyāya Logic</em>. Harvard University Press.</div>
+  </div>
+
+  <div class="footer-nav">
+    <span class="fn-btn" onclick="showSection('s-cross-tradition')">← §7 Debate</span>
+    <a class="fn-btn" href="shastra-series-part5.html">Continue to Part V: Modern Continuity →</a>
+  </div>
+</section>
+
+</div>
+</main>
+</div>
+<button class="menu-toggle" id="menuToggle">☰</button>
+<script>
+const navlinks=document.querySelectorAll('.navlink');
+const tabbtns=document.querySelectorAll('.tabbtn');
+const sections=document.querySelectorAll('.section');
+const crumb=document.getElementById('crumb');
+function showSection(id){
+  sections.forEach(s=>s.classList.toggle('hidden',s.id!==id));
+  navlinks.forEach(l=>l.classList.toggle('active',l.dataset.target===id));
+  tabbtns.forEach(t=>t.classList.toggle('active',t.dataset.target===id));
+  const activeTab=document.querySelector('.tabbtn[data-target="'+id+'"]');
+  if(activeTab)crumb.textContent=activeTab.textContent;
+  window.scrollTo({top:0,behavior:'smooth'});
+  document.getElementById('sidebar').classList.remove('open');
+  history.replaceState(null,'','#'+id);
+  if(activeTab)activeTab.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});
+}
+navlinks.forEach(l=>l.addEventListener('click',()=>showSection(l.dataset.target)));
+tabbtns.forEach(t=>t.addEventListener('click',()=>showSection(t.dataset.target)));
+document.getElementById('menuToggle').addEventListener('click',()=>{document.getElementById('sidebar').classList.toggle('open');});
+window.addEventListener('DOMContentLoaded',()=>{
+  const hash=location.hash.replace('#','');
+  showSection(hash&&document.getElementById(hash)?hash:'s-abstract4');
+});
+</script>
+</body>
+</html>
